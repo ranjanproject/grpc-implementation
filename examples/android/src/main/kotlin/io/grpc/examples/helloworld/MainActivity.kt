@@ -79,6 +79,17 @@ class GreeterRCP(uri: Uri) : Closeable {
         }
     }
 
+    suspend fun sayHelloAgain(name: String){
+        try {
+            val request = helloRequest { this.name = name }
+            val response = greeter.sayHelloAgain(request)
+            responseState.value = response.message
+        }catch (e: Exception) {
+            responseState.value = e.message ?: "Unknown Error"
+            e.printStackTrace()
+        }
+    }
+
     override fun close() {
         channel.shutdownNow()
     }
@@ -95,7 +106,7 @@ fun Greeter(greeterRCP: GreeterRCP) {
         Text(stringResource(R.string.name_hint), modifier = Modifier.padding(top = 10.dp))
         OutlinedTextField(nameState.value, { nameState.value = it })
 
-        Button({ scope.launch { greeterRCP.sayHello(nameState.value.text) } }, Modifier.padding(10.dp)) {
+        Button({ scope.launch { greeterRCP.sayHelloAgain(nameState.value.text) } }, Modifier.padding(10.dp)) {
         Text(stringResource(R.string.send_request))
     }
 
