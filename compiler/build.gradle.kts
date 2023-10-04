@@ -28,7 +28,7 @@ dependencies {
     testImplementation("com.google.protobuf:protobuf-gradle-plugin:0.9.4")
     testImplementation("com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0")
     testImplementation("org.junit.jupiter:junit-jupiter-engine:5.10.0")
-    testImplementation("org.mockito:mockito-core:4.11.0")
+    testImplementation("org.mockito:mockito-core:5.5.0")
 }
 
 tasks.jar {
